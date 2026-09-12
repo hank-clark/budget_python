@@ -1,0 +1,6 @@
+*.csv
+*.xls
+*.xlsx
+*.xlsm
+budgetparser/
+*.ipynb
