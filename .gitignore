@@ -5,7 +5,6 @@
 budgetparser/
 *.ipynb
 *.db
-create_sql.py
-import_sql.py
+
 *.db
 *.sql
