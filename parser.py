@@ -49,7 +49,7 @@ def clean_bank_checking_df(df):
     return reorder_columns(df)
 
 
-directory_path = Path("./data/raw")
+directory_path = Path('./data/raw')
 df_dict = {}
 
 for file_path in directory_path.glob('*.csv'):
@@ -63,8 +63,8 @@ for key in df_dict:
     if df_dict[key].columns.to_list() == ['Date', 'Description', 'Amount (in $)', 'Account Name', 'Transaction Type', 'Category', 'Subcategory', 'Hidden Transaction']:
         df_dict[key] = clean_credit_card_df(df_dict[key])
     elif (df_dict[key].columns.to_list() == ['Date', 'Account', 'Account Number', 'Account Type', 'Description', 'Check #', 'Category', 'Memo', 'Credit', 'Debit']) and ((df_dict[key]['Account'] == 'Visa Credit Card').all()):
-        print("bank cc true")
-        df_dict[key] = clean_bankcc_df(df_dict[key])
+            df_dict[key] = clean_bankcc_df(df_dict[key])
     else: df_dict[key] = clean_bank_checking_df(df_dict[key])
 
 concatted_df = pd.concat(df_dict.values(), ignore_index=True)
+concatted_df.to_excel('./data/processed/concatted.xlsx', index=False)
