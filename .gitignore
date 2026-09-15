@@ -4,3 +4,4 @@
 *.xlsm
 budgetparser/
 *.ipynb
+*.db
