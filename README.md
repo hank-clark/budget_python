@@ -1,19 +1,16 @@
-## Goal
-Create a personal budget system for combining spending statement from multiple different sources into a single combined and standardized format.
+# Personal Finance ETL & Aggregation Engine
 
-## Project Principles
-1. Lightweight. This should be a system that has relatively few moving parts.
-2. Data Integrity. I want to ensure no duplicate entries of transactions, system being able to handle multiple formats from different sources.
+A lightweight Python-based ETL pipeline that ingests, cleans, normalizes, and aggregates transaction data from diverse financial institution statements into a centralized SQLite database.
 
-## Data Pipeline
-1. In main directory have a 'data' folder that contains folders called 'processed' and 'raw'
-2. 'raw' should contain the CSV files that are exported from your source of transactions.
-3. Running parser.py should import all the CSVs into a dictionary of pandas DataFrames. This will search your CSV files for the first instance of 'Date' and know that is the header rows.
-4. After running parser.py, running create_sql.py should create the sqlite DB and tables.
-5. **This step is where data categorization will be implemented.** I manually cleaned data this time in labeled.xlsx just for easier testing. This categorization can be implemented later.
-6. After data categorization is complete, processed transactions from labeled.xlsx will be imported into my sqlite DB with import_sql.py.
+## Key Features & Design Principles
 
-### Data Folder Outline
+* **Robust Data Pipeline:** Extracts raw statement data from heterogeneous CSV files and standardizes schemas for unified querying.
+* **Data Integrity & Deduplication:** Prevents duplicate entries through robust schema validation and transactional loading.
+* **Minimalist & Lightweight:** Built using core Python libraries without unnecessary dependencies to ensure low overhead and easy local execution.
+* **Relational Schema:** Features a normalized database model linking transactions to dynamic, two-tier spending categories.
+
+## System Architecture & Data Flow
+
 ```
 budget_python/
 |-- data/
@@ -26,21 +23,29 @@ budget_python/
 |-- create_sql.py
 |-- import_sql.py    
 ```
+### Execution Workflow
 
-## Tools Utilized
-- Python for data extraction, transformation
-- SQLite for database to be a simple, self hosted format
+1. **Ingestion (`parser.py`):** Scans `data/raw/` for raw institution statements. Dynamically detects header locations by identifying key columns (`Date`) and loads records into structured Pandas DataFrames.
+2. **Database Initialization (`create_sql.py`):** Configures the local SQLite database and instantiates relational tables with proper primary and foreign key constraints.
+3. **Categorization & Staging:** Processes raw transactions through a standardized categorization pipeline (staged via `data/processed/labeled.xlsx`).
+4. **ETL Load (`import_sql.py`):** Ingests transformed, categorized transactions directly into the primary SQLite database.
 
-## SQL Database Diagram
-I want to implement a way to help with categorization of transactions. I've included the rudimentary relational database diagram.
+## Database Design
 
-- my transactions table will be the 'master' list of transactions
-- subcategory table will be used for mapping the subcategory to correct category
-- category table is for storing my categories
+The relational model utilizes a master transaction log coupled with a two-tier hierarchy (`categories` and `subcategories`) to support flexible reporting and granularity.
+
 
 <img width="672" height="582" alt="prototype Budget SQL diagram" src="https://github.com/user-attachments/assets/04642111-6bb0-4689-8cfc-4421e125c445" />
 
-# Future Add-ons
-1. Automated categorization of transactions
-2. Future proofing for transaction data from different sources (ex: data from different bank or credit card company that is structured different)
-3. Budget visualization dashboard
+## Tech Stack
+
+* **Language:** Python 3.12.2
+* **Data Transformation:** Pandas
+* **Database Engine:** SQLite3
+
+
+## Roadmap & Future Enhancements
+
+- [ ] **Automated Categorization Engine:** Implement machine learning / heuristic rules (regex/TF-IDF) to auto-tag transactions upon ingestion.
+- [ ] **Adaptive Parsing:** Expand parsing layer support for varying bank schemas, custom date formats, and non-standard delimiter layouts.
+- [ ] **Analytics Dashboard:** Integrate Streamlit or Metabase for visual budget tracking and spending analysis.
