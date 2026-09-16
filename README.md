@@ -1,11 +1,11 @@
-# Goal
+## Goal
 Create a personal budget system for combining spending statement from multiple different sources into a single combined and standardized format.
 
-# Project Principles
+## Project Principles
 1. Lightweight. This should be a system that has relatively few moving parts.
 2. Data Integrity. I want to ensure no duplicate entries of transactions, system being able to handle multiple formats from different sources.
 
-# Stack
+## Tools Utilized
 - Python for data extraction, transformation
 - SQLite for database to be a simple, self hosted format
 
