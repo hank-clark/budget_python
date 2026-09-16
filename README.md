@@ -14,6 +14,7 @@ Create a personal budget system for combining spending statement from multiple d
 6. After data categorization is complete, processed transactions from labeled.xlsx will be imported into my sqlite DB with import_sql.py.
 
 ### Data Folder Outline
+```
 budget_python/
 |-- data/
 |    |-- raw/
@@ -24,6 +25,7 @@ budget_python/
 |-- parser.py
 |-- create_sql.py
 |-- import_sql.py    
+```
 
 ## Tools Utilized
 - Python for data extraction, transformation
