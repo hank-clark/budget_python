@@ -23,7 +23,7 @@ try:
     CREATE TABLE IF NOT EXISTS transactions (
         transaction_id INTEGER PRIMARY KEY AUTOINCREMENT,
         account TEXT NOT NULL,
-        date TEXT NOT NULL,  -- SQLite handles dates best as ISO-8601 strings (YYYY-MM-DD)
+        date TEXT NOT NULL,
         description TEXT,
         debit REAL DEFAULT 0.00,
         credit REAL DEFAULT 0.00,

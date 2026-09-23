@@ -5,6 +5,6 @@
 budgetparser/
 *.ipynb
 *.db
-
+*.db-journal
 *.db
 *.sql

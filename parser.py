@@ -10,14 +10,15 @@ def return_header_row_number(file_path, target_column:str):
     return 0
 
 def standardize_date(df):
-    date_format_tuple = ('%m/%d/%Y', '%b-%d-%Y')
+    date_format_tuple = ('%m/%d/%Y', '%b-%d-%Y', '%Y-%m-%d')
     
     for date_format in date_format_tuple:
         try:
-            df['Date'] = pd.to_datetime(df['Date'], format=date_format).dt.strftime('%m/%d/%Y')
+            df['Date'] = pd.to_datetime(df['Date'], format=date_format).dt.strftime('%Y-%m-%d')
             break
         except:
             pass
+            #add in future error handling for mismatching date format
 
     return df
 
