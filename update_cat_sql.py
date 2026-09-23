@@ -1,7 +1,7 @@
 import pandas as pd
 import sqlite3
 
-sql_connection = sqlite3.connect('./data/processed/transactions.db')
+sql_connection = sqlite3.connect('./data/processed/budget.db')
 cursor = sql_connection.cursor()
 
 category_df = pd.read_excel('./data/processed/categories_and_subcategories.xlsx', sheet_name='categories')

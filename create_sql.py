@@ -1,6 +1,6 @@
 import sqlite3
 
-sql_connection = sqlite3.connect('./data/processed/transactions.db')
+sql_connection = sqlite3.connect('./data/processed/budget.db')
 
 try:
         

@@ -6,7 +6,7 @@ imported_transactions_df = pd.read_excel('./data/processed/labeled.xlsx', header
 imported_transactions_df = imported_transactions_df.drop(columns='Subcategory')
 
 
-sql_connection = sqlite3.connect('./data/processed/transactions.db')
+sql_connection = sqlite3.connect('./data/processed/budget.db')
 cursor = sql_connection.cursor()
 
 cursor.execute(
